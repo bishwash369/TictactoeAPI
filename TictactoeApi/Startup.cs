@@ -1,7 +1,9 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TictactoeApi.Data;
+using TictactoeApi.Models;
+using TictactoeApi.Repositories;
 
 namespace TictactoeApi
 {
@@ -25,7 +30,22 @@ namespace TictactoeApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           services.AddDbContext<ApplicationDbContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<ITictactoeRepository, TictactoeRepository>();
+            services.AddAutoMapper(typeof(TicTacToeMappings));
+
+            _ = services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("TictactoeApiSpec",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "Tictactoe API",
+                        Description = "API for Tictactoe App",
+                    });
+            });
             services.AddControllers();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +57,14 @@ namespace TictactoeApi
             }
 
             app.UseHttpsRedirection();
+            
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/TictactoeApiSpec/swagger.json", "TictactoeApi");
+                options.RoutePrefix = "";
+            });
 
             app.UseRouting();
 
