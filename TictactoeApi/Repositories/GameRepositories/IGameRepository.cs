@@ -11,10 +11,10 @@ namespace TictactoeApi.Repositories.GameRepositories
     {
         ICollection<Game> GetGames();
         Player GetGame(int gameId);
-        bool CreateGame(Game game);
+        bool StartGame(Game game);
+        bool GameExists(int id);
         bool UpdateGame(Game game);
-        bool DeleteGame(Game game);
+       // bool DeleteGame(Game game);
         bool Save();
-
     }
 }

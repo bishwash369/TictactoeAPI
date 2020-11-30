@@ -17,6 +17,7 @@ using TictactoeApi.Models;
 using TictactoeApi.Repositories;
 using System.Reflection;
 using AutoMapper;
+using TictactoeApi.Repositories.MoveRepositories;
 
 namespace TictactoeApi
 {
@@ -35,6 +36,7 @@ namespace TictactoeApi
            services.AddDbContext<ApplicationDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ITictactoeRepository, TictactoeRepository>();
+            services.AddScoped<IMoveRepository, MoveRepository>();
             services.AddAutoMapper(typeof(TicTacToeMappings));
             _ = services.AddSwaggerGen(options =>
             {

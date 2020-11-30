@@ -8,23 +8,6 @@ namespace TictactoeApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Games",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Status = table.Column<bool>(nullable: false),
-                    FirstPlayerId = table.Column<int>(nullable: false),
-                    LastPLayerId = table.Column<int>(nullable: false),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Games", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Players",
                 columns: table => new
                 {
@@ -32,16 +15,38 @@ namespace TictactoeApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    GameId = table.Column<int>(nullable: true)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Players", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Games",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<bool>(nullable: false),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    FirstPlayerId = table.Column<int>(nullable: false),
+                    LastPlayerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Games", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Players_Games_GameId",
-                        column: x => x.GameId,
-                        principalTable: "Games",
+                        name: "FK_Games_Players_FirstPlayerId",
+                        column: x => x.FirstPlayerId,
+                        principalTable: "Players",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LastPlayerId",
+                        column: x => x.LastPlayerId,
+                        principalTable: "Players",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -75,6 +80,16 @@ namespace TictactoeApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Games_FirstPlayerId",
+                table: "Games",
+                column: "FirstPlayerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Games_LastPlayerId",
+                table: "Games",
+                column: "LastPlayerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Moves_GameId",
                 table: "Moves",
                 column: "GameId");
@@ -83,11 +98,6 @@ namespace TictactoeApi.Migrations
                 name: "IX_Moves_PlayerId",
                 table: "Moves",
                 column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Players_GameId",
-                table: "Players",
-                column: "GameId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -96,10 +106,10 @@ namespace TictactoeApi.Migrations
                 name: "Moves");
 
             migrationBuilder.DropTable(
-                name: "Players");
+                name: "Games");
 
             migrationBuilder.DropTable(
-                name: "Games");
+                name: "Players");
         }
     }
 }

@@ -30,7 +30,7 @@ namespace TictactoeApi.Repositories.MoveRepositories
             return data;
         }
 
-        public ICollection<Move> GetMoves()
+        public ICollection<Move> GetMovesList()
         {
             var data = _db.Moves.OrderBy(a => a.Id).ToList();
             return (ICollection<Move>)data;
@@ -40,6 +40,12 @@ namespace TictactoeApi.Repositories.MoveRepositories
         {
             _db.Moves.Add(move);
             return Save();
+        }
+
+        public bool MoveExists(int id)
+        {
+            bool value = _db.Moves.Any(a => a.Id == id);
+            return value;
         }
 
         public bool Save()

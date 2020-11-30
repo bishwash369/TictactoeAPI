@@ -17,17 +17,17 @@ namespace TictactoeApi.Repositories.GameRepositories
             _db = db;                                                       //to access dbcontext
         }
 
-        public bool CreateGame(Game game)
+        public bool StartGame(Game game)
         {
             _db.Games.Add(game);
             return Save();
         }
 
-        public bool DeleteGame(Game game)
+       /* public bool DeleteGame(Game game)
         {
             _db.Games.Remove(game);
             return Save();
-        }
+        } */
 
         public Game GetGame(int gameId)
         {
@@ -41,6 +41,11 @@ namespace TictactoeApi.Repositories.GameRepositories
             return (ICollection<Game>)data;
         }
 
+        public bool GameExists(int id)
+        {
+            bool value = _db.Games.Any(a => a.Id == id);
+            return value;
+        }
         public bool Save()
         {
             return _db.SaveChanges() >= 0;

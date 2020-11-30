@@ -13,8 +13,8 @@ namespace TictactoeApi.Models
         public int PlayerId { get; set; }
         public int GameId { get; set; }
                 
-        public virtual Player Player { get; set; }
-        public virtual Game Game { get; set; }
+        public virtual Player Players { get; set; }
+        public virtual Game Games { get; set; }
 
     }
 }

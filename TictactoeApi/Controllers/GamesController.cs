@@ -25,6 +25,7 @@ namespace TictactoeApi.Controllers
 
         }
 
+        //[Route("GamesList")]
         [HttpGet]
         public IActionResult GetGames()
         {
@@ -38,6 +39,7 @@ namespace TictactoeApi.Controllers
             return Ok(objDto);
         }
 
+        //[Route("GameDisplay")]
         [HttpGet("{gameId:int}")]
         public IActionResult GetGame(int gameId)
         {
@@ -50,17 +52,18 @@ namespace TictactoeApi.Controllers
             return Ok(objDto);
         }
 
+        //[Route("StartGame")]
         [HttpPost]
         public IActionResult CreateGame([FromBody] GameDto gameDto)
         {
-            if (gameDto == null)                    //if null then 400 badrequest i.e. client error(invalid syntaz/request/message, etc)
+            if (gameDto == null)                    
             {
-                return BadRequest(ModelState);              //Modelstate stores validation errors and returns them if error is encountered
+                return BadRequest(ModelState); 
             }
 
-            if (_gameRepo.GameExists(gameDto.Name))
+            if (_gameRepo.GameExists(gameDto.Id))
             {
-                ModelState.AddModelError("", "Game Exists!");          //returns if an existing item is posted again
+                ModelState.AddModelError("", "Game Exists!"); 
                 return StatusCode(404, ModelState);
             }
 
@@ -71,16 +74,16 @@ namespace TictactoeApi.Controllers
 
             var gameObj = _mapper.Map<Game>(gameDto);
 
-            if (!_gameRepo.CreateGame(gameObj))
+            if (!_gameRepo.StartGame(gameObj))
             {
-                ModelState.AddModelError("", $"Something went wrong when saving the record {gameObj.Name}");
-                return StatusCode(500, ModelState);             //statuscode 500 is returns internal server error
+                ModelState.AddModelError("", $"Something went wrong when saving the record {gameObj.Id}");
+                return StatusCode(500, ModelState);            
             }
 
-            return CreatedAtRoute("GetGame", new { gameId = gameObj.Id }, gameObj);                   //creates and returns by Id after routing
+            return CreatedAtRoute("GetGame", new { gameId = gameObj.Id }, gameObj);                  
         }
 
-
+        //[Route("MakeChanges")]
         [HttpPatch("{gameId:int}", Name = "UpdateGame")]
         public IActionResult UpdateGame(int gameId, [FromBody] GameDto gameDto)
         {
@@ -92,15 +95,15 @@ namespace TictactoeApi.Controllers
             var gameObj = _mapper.Map<Game>(gameDto);
             if (!_gameRepo.UpdateGame(gameObj))
             {
-                ModelState.AddModelError("", $"Something went wrong when updating the record {gameObj.Name}");
-                return StatusCode(500, ModelState);             //statuscode 500 is returns internal server error
+                ModelState.AddModelError("", $"Something went wrong when updating the record {gameObj.Id}");
+                return StatusCode(500, ModelState);             
             }
 
             return NoContent();
 
         }
 
-        [HttpDelete("{gameId:int}", Name = "UpdateGame")]
+        /*[HttpDelete("{gameId:int}", Name = "DeleteGame")]
         public IActionResult DeleteGame(int gameId)
         {
             if (!_gameRepo.GameExists(gameId))
@@ -111,12 +114,12 @@ namespace TictactoeApi.Controllers
             var gameObj = _gameRepo.GetGame(gameId);
             if (!_gameRepo.DeleteGame(gameObj))
             {
-                ModelState.AddModelError("", $"Something went wrong when deleting the record {gameObj.Name}");
-                return StatusCode(500, ModelState);             //statuscode 500 is returns internal server error
+                ModelState.AddModelError("", $"Something went wrong when deleting the record {gameObj.Id}");
+                return StatusCode(500, ModelState);             
             }
 
             return NoContent();
-
         }
+         */
     }
 }

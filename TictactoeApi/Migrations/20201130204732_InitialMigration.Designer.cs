@@ -10,8 +10,8 @@ using TictactoeApi.Data;
 namespace TictactoeApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201130121311_DtosUpdated")]
-    partial class DtosUpdated
+    [Migration("20201130204732_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace TictactoeApi.Migrations
                     b.Property<int>("FirstPlayerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LastPLayerId")
+                    b.Property<int>("LastPlayerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartTime")
@@ -44,6 +44,10 @@ namespace TictactoeApi.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FirstPlayerId");
+
+                    b.HasIndex("LastPlayerId");
 
                     b.ToTable("Games");
                 });
@@ -89,39 +93,43 @@ namespace TictactoeApi.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GameId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
-
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("TictactoeApi.Models.Game", b =>
+                {
+                    b.HasOne("TictactoeApi.Models.Player", "FirstPlayer")
+                        .WithMany()
+                        .HasForeignKey("FirstPlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TictactoeApi.Models.Player", "LastPlayer")
+                        .WithMany("Games")
+                        .HasForeignKey("LastPlayerId")
+                        .HasConstraintName("FK_LastPlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TictactoeApi.Models.Move", b =>
                 {
-                    b.HasOne("TictactoeApi.Models.Game", "Game")
-                        .WithMany()
+                    b.HasOne("TictactoeApi.Models.Game", "Games")
+                        .WithMany("Moves")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TictactoeApi.Models.Player", "Player")
-                        .WithMany()
+                    b.HasOne("TictactoeApi.Models.Player", "Players")
+                        .WithMany("Moves")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TictactoeApi.Models.Player", b =>
-                {
-                    b.HasOne("TictactoeApi.Models.Game", null)
-                        .WithMany("Players")
-                        .HasForeignKey("GameId");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,11 +9,16 @@ namespace TictactoeApi.Models
     {
         public int Id { get; set; }
         public bool Status { get; set; }
-        public int FirstPlayerId { get; set; }
-        public int LastPLayerId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public ICollection<Player> Players { get; set; }
+        public int FirstPlayerId { get; set; }
+        public int LastPlayerId { get; set; }
 
+        public virtual Player FirstPlayer { get; set; }
+        public virtual Player LastPlayer { get; set; }
+
+        public ICollection<Move> Moves { get; set; }
+        
     }
 }
+
