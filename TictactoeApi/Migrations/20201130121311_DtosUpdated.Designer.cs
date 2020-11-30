@@ -10,8 +10,8 @@ using TictactoeApi.Data;
 namespace TictactoeApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201125190135_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201130121311_DtosUpdated")]
+    partial class DtosUpdated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

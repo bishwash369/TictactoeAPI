@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,12 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TictactoeApi.Data;
 using TictactoeApi.Models;
 using TictactoeApi.Repositories;
+using System.Reflection;
+using AutoMapper;
 
 namespace TictactoeApi
 {
@@ -34,17 +36,28 @@ namespace TictactoeApi
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ITictactoeRepository, TictactoeRepository>();
             services.AddAutoMapper(typeof(TicTacToeMappings));
-
             _ = services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("TictactoeApiSpec",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "Tictactoe API",
-                        Description = "API for Tictactoe App",
+                        Version = "1",
+                        Description = "API for Tictactoe",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email = "bishwash.parajuli@alphaventus.com",
+                            Name = "Bishwash Krishna Parajuli",
+                            Url = new Uri("https://www.facebook.com/bishwash369")
+                        },
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                        {
+                            Name = "MIT License",
+                            Url = new Uri("https://en.wikipedia.com/wiki/MIT_License")
+                        },
                     });
             });
-            services.AddControllers();
+                services.AddControllers();
             
         }
 
@@ -62,7 +75,7 @@ namespace TictactoeApi
 
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/TictactoeApiSpec/swagger.json", "TictactoeApi");
+                options.SwaggerEndpoint("/swagger/TictactoeApiSpec/swagger.json", "Tictactoe API");
                 options.RoutePrefix = "";
             });
 

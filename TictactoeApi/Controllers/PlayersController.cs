@@ -49,6 +49,7 @@ namespace TictactoeApi.Controllers
             return Ok(objDto);
         }
 
+        [HttpPost]
         public IActionResult CreatePlayer([FromBody] PlayerDto playerDto)
         {
             if (playerDto == null)                    //if null then 400 badrequest i.e. client error(invalid syntaz/request/message, etc)

@@ -13,6 +13,8 @@ namespace TictactoeApi.Data
         public TicTacToeMappings()
         {
             CreateMap<Player, PlayerDto>().ReverseMap();
+            CreateMap<Player, GameDto>().ReverseMap();
+            CreateMap<Player, MoveDto>().ReverseMap();
 
         }
         

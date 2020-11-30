@@ -2,7 +2,7 @@
 
 namespace TictactoeApi.Migrations
 {
-    public partial class ModelsAndDbContextUpdated : Migration
+    public partial class DtosUpdated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pavilion\\source\\repos\\Tictactoe\\TictactoeApi\\TictactoeApi.csproj": {}
+    "D:\\ABT\\TictactoeAPI\\TictactoeApi\\TictactoeApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pavilion\\source\\repos\\Tictactoe\\TictactoeApi\\TictactoeApi.csproj": {
+    "D:\\ABT\\TictactoeAPI\\TictactoeApi\\TictactoeApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pavilion\\source\\repos\\Tictactoe\\TictactoeApi\\TictactoeApi.csproj",
+        "projectUniqueName": "D:\\ABT\\TictactoeAPI\\TictactoeApi\\TictactoeApi.csproj",
         "projectName": "TictactoeApi",
-        "projectPath": "C:\\Users\\pavilion\\source\\repos\\Tictactoe\\TictactoeApi\\TictactoeApi.csproj",
-        "packagesPath": "C:\\Users\\pavilion\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pavilion\\source\\repos\\Tictactoe\\TictactoeApi\\obj\\",
+        "projectPath": "D:\\ABT\\TictactoeAPI\\TictactoeApi\\TictactoeApi.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\ABT\\TictactoeAPI\\TictactoeApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pavilion\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
