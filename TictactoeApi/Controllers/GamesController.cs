@@ -58,7 +58,7 @@ namespace TictactoeApi.Controllers
 
         [HttpPost]
         [Route("EndGame")]
-        public async Task<bool> EndGame([FromBody] StartEndGameDto)
+        public async Task<bool> EndGame([FromBody] StartEndGameDto game)
         {
             var create = new Game()
             {
@@ -72,7 +72,7 @@ namespace TictactoeApi.Controllers
             return true;
         }
     }
-{
+}
 
 
 
