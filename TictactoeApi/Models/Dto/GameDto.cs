@@ -14,9 +14,5 @@ namespace TictactoeApi.Models.Dto
         public int FirstPlayerId { get; set; }
         public int LastPlayerId { get; set; }
 
-        public virtual Player FirstPlayer { get; set; }
-        public virtual Player LastPlayer { get; set; }
-
-        public ICollection<Move> Moves { get; set; }
     }
 }

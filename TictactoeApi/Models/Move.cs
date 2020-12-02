@@ -8,8 +8,8 @@ namespace TictactoeApi.Models
     public class Move
     {
         public int Id { get; set; }
-        public int MoveType { get; set; }
-        public string Position {get; set;}
+        public string MoveType { get; set; }
+        public int Position {get; set;}
         public int PlayerId { get; set; }
         public int GameId { get; set; }
                 

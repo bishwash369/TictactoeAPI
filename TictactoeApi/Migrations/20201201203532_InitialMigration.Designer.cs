@@ -10,7 +10,7 @@ using TictactoeApi.Data;
 namespace TictactoeApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201130204732_InitialMigration")]
+    [Migration("20201201203532_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace TictactoeApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FirstPlayerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<int>("LastPlayerId")
@@ -62,14 +65,14 @@ namespace TictactoeApi.Migrations
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MoveType")
-                        .HasColumnType("int");
+                    b.Property<string>("MoveType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

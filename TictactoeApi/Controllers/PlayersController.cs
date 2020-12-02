@@ -84,7 +84,7 @@ namespace TictactoeApi.Controllers
 
         //[Route("UpdatePlayer")]
         [HttpPatch("{playerId:int}", Name = "UpdatePlayer")]
-        public IActionResult UpdatePlayer(int playerId, [FromBody] PlayerDto playerDto)
+        public IActionResult UpdatePlayer(int playerId, [FromBody] PlayerUpdateDto playerDto)
         {
             if (playerDto == null || playerId != playerDto.Id)
             {

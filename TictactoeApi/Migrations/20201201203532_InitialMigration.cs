@@ -32,7 +32,8 @@ namespace TictactoeApi.Migrations
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     FirstPlayerId = table.Column<int>(nullable: false),
-                    LastPlayerId = table.Column<int>(nullable: false)
+                    LastPlayerId = table.Column<int>(nullable: false),
+                    GameId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,8 +58,8 @@ namespace TictactoeApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MoveType = table.Column<int>(nullable: false),
-                    Position = table.Column<string>(nullable: true),
+                    MoveType = table.Column<string>(nullable: true),
+                    Position = table.Column<int>(nullable: false),
                     PlayerId = table.Column<int>(nullable: false),
                     GameId = table.Column<int>(nullable: false)
                 },

@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TictactoeApi.Models
+namespace TictactoeApi.Controllers.Dto
 {
-    public class Player
+    public class CreatePlayersDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-
-        public ICollection<Game> Games { get; set; }
-        public ICollection<Move> Moves { get; set; }
     }
 }

@@ -7,13 +7,16 @@ namespace TictactoeApi.Models.Dto
 {
     public class MoveDto
     {
+       /* public MoveDto()
+        {
+            Games = new List<GameDto>();
+        } */
         public int Id { get; set; }
-        public int MoveType { get; set; }
-        public string Position { get; set; }
+        public string MoveType { get; set; }
+        public int Position { get; set; }
         public int PlayerId { get; set; }
         public int GameId { get; set; }
 
-        public virtual Player Players { get; set; }
-        public virtual Game Games { get; set; }
+        //public List<GameDto> Games { get; set; }
     }
 }
