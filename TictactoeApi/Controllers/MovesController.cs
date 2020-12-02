@@ -79,7 +79,7 @@ namespace TictactoeApi.Controllers
                 {
                     for(int i=0; i<arr1.Length;i++)
                     { 
-                        if(arr == arr[i])
+                        if(arr == arr1[i])
                         { 
                             throw new ArgumentException("Winner is Player" + move.PlayerId);
                         }
@@ -89,7 +89,7 @@ namespace TictactoeApi.Controllers
                 {
                     for (int i = 0; i < arr1.Length; i++)
                     {
-                        if (arr == arr[i])
+                        if (arr == arr1[i])
                         {
                             throw new ArgumentException("Winner is Player" + move.PlayerId);
                         }
